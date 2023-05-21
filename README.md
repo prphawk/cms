@@ -1,5 +1,5 @@
 # Comittee Manager
-### Course: Laboratória de Sistemas de Software
+### Course: Laboratório de Sistema de Software
 #### Professor: Marcelo Pimenta
 #### Semester: 2022/2
 ---

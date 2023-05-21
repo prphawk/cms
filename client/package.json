@@ -1,5 +1,5 @@
 {
-  "name": "comittee-manager-app",
+  "name": "committee-manager-system_client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -46,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.26"
   }
 }
