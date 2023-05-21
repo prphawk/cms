@@ -10,7 +10,7 @@ export const getOneCommitteeParticipations = async (members: committeeGetAllAnsw
     let member_details : memberGetOneMemberDetailsType = await RequestManager.getOneMember(member.member.id)
     let memberOnCommittee_details = {} as any
 
-    if(with_inactive == false) {
+    if(!with_inactive) {
       memberOnCommittee_details = member_details.committees
         .filter( (obj : memberGetOneMemberDetailsType_committeeDetails) => {
           return obj.committee_id === committee_id})

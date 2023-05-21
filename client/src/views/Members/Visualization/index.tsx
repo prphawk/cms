@@ -54,7 +54,7 @@ const Visualization = () => {
     closePopUp()
 
     let deactivated_member_index = memberContent.findIndex((obj:any ) => {
-      return obj.id == currentMember.id
+      return obj.id === currentMember.id
     })
 
     memberContent.splice(deactivated_member_index, 1)

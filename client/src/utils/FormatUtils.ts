@@ -59,8 +59,8 @@ function formatMemberCommitteeDetails(
       content: [
         detail.committee.name,
         detail.role,
-        detail.begin_date != null ? formatDate(detail.begin_date) : '-',
-        detail.observations != null ? detail.observations : '-',
+        detail.begin_date ? formatDate(detail.begin_date) : '-',
+        detail.observations ? detail.observations : '-',
       ],
     })
   })
@@ -71,8 +71,8 @@ function formatMemberCommitteeDetails(
       content: [
         detail.committee.name,
         detail.role,
-        detail.begin_date != null ? formatDate(detail.begin_date) : '-',
-        detail.observations != null ? detail.observations : '-',
+        detail.begin_date ? formatDate(detail.begin_date) : '-',
+        detail.observations ? detail.observations : '-',
       ],
     })
   })
@@ -97,13 +97,9 @@ export function formatMemberOnCommitteeDetails(
     content: [
       memberOnCommittee_details.role,
       member_details.name,
-      memberOnCommittee_details.begin_date == null
-        ? '-'
-        : formatDate(memberOnCommittee_details.begin_date),
+      memberOnCommittee_details.begin_date ? formatDate(memberOnCommittee_details.begin_date) : '-',
       memberOnCommittee_details.term + 'º',
-      memberOnCommittee_details.observations == null
-        ? '-'
-        : memberOnCommittee_details.observations,
+      memberOnCommittee_details.observations ? memberOnCommittee_details.observations : '-',
     ],
   } as committeeParticipation
 }
@@ -119,19 +115,19 @@ export function formatCommittee(
     let formated_date_duration: string = '-'
     let committee_details: committeeParticipation[] = []
 
-    if (committee.begin_date != null && committee.end_date != null) {
+    if (committee.begin_date && committee.end_date) {
       formated_date_duration =
         formatDate(committee.begin_date) +
         ' a ' +
         formatDate(committee.end_date)
     }
-    else if (committee.begin_date != null) {
+    else if (committee.begin_date) {
       formated_date_duration = 
         formatDate(committee.begin_date) +
         ` a ` +
         `-`
     }
-    else if (committee.end_date != null) {
+    else if (committee.end_date) {
       formated_date_duration = `- a ${formatDate(committee.end_date)}`
     }
 
@@ -142,7 +138,7 @@ export function formatCommittee(
         committee.bond,
         committee.ordinance,
         formated_date_duration,
-        committee.term != null ? committee.term + '°' : "",
+        committee.term !== null ? committee.term + '°' : "",
       ],
       participation_details: committee_details_list[i],
     })
@@ -157,7 +153,7 @@ export function formatDate_memberOnCommittee_PatchDTO (
   unformated_date: string
 ) {
 
-  if(unformated_date.length != 10) {
+  if(unformated_date.length !== 10) {
     return null
   }
 
@@ -177,7 +173,7 @@ export function formatMemberOnCommittee_PatchDTO(
 ) {
   let formated_info = [] as any;
   
-  if(opType == "committee_edit") {
+  if(opType === "committee_edit") {
     memberOnCommitteeContent = memberOnCommitteeContent as committeeContentType
     formated_info = {
       role: memberOnCommitteeContent[0],

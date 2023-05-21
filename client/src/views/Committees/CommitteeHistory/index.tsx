@@ -36,7 +36,7 @@ const CommitteeHistory = () => {
   
 
   const updateContent = () => {
-    if(contentDisplayed == false){
+    if(!contentDisplayed){
 
     
 
