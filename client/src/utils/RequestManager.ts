@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
-import BackendPaths from '../constants/BackendPaths';
+import BackendPaths from '../routes/BackendPaths';
 import { committeeGetAllAnswerEntry, committeePatchDTO, committeePostDTO, memberGetAllAnswerEntry, memberGetOneMemberDetailsType, memberGetOptionsEntry, memberOnCommittee_PatchDTO, memberPostDTO } from '../types/requestAnswerTypes';
 
 class requestManager {
@@ -12,7 +12,7 @@ class requestManager {
 
     private async makeGetRequest(access_point: string, params:any = {}) { //TODO: Give 'params' a type, an amalgam of possible types.
         let result = await this.axios_socket
-            .get(access_point, {params: params})
+            .get(access_point, {params})
                 .then(res => res.data)
                 .catch(err => console.log(err))
         

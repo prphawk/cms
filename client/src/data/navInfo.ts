@@ -1,5 +1,5 @@
 import { NavItem } from '../components/NavBar/types'
-import Paths from '../constants/Paths'
+import Paths from '../routes/Paths'
 
 export const navIcon: NavItem[] = [
   {

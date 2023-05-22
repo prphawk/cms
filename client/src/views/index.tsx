@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Paths from '../constants/Paths'
+import Paths from '../routes/Paths'
 import ComitteesView from './Committees'
 import NotFoundView from './NotFound'
 import MembersView from './Members'
@@ -13,11 +13,11 @@ import { navIcon } from '../data/navInfo'
 const Main: React.FC = () => {
   return (
     <div>
-      <NavBar data={navIcon} />
       <EntityProvider>
         <Content>
           <Router>
-            <Routes>
+            <NavBar data={navIcon} />
+            <Routes> 
               <Route path={Paths.COMMITTEE} element={<ComitteesView />} />
               <Route path={Paths.MEMBERS} element={<MembersView />} />
               <Route

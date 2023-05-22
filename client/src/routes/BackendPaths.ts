@@ -1,5 +1,6 @@
+
 class BackendPaths {
-    ROOT = 'http://localhost:3000'
+    ROOT = 'localhost:5000'
     COMMITTEE = this.ROOT + '/committee'
     MEMBER = this.ROOT + '/member'
     MEMBER_ON_COMMITTEES = this.ROOT + '/member_on_committee'

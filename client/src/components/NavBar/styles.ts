@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
+import { Link } from 'react-router-dom'
 
-export const Container = styled.header`
+export const ContainerS = styled.header`
   position: fixed;
   top: 0;
   left: 0;
@@ -10,13 +11,13 @@ export const Container = styled.header`
   padding: 2rem 0;
 `
 
-export const LinkContainer = styled.nav`
+export const LinkContainerS = styled.nav`
   display: flex;
   flex-direction: column;
   padding-right: 1rem;
 `
 
-export const Link = styled.a<{ selected: boolean }>`
+export const LinkS = styled(Link)<{ selected: boolean }>`
   background-color: transparent;
   width: -webkit-fill-available;
   display: flex;
@@ -35,7 +36,7 @@ export const Link = styled.a<{ selected: boolean }>`
     `}
 `
 
-export const Label = styled.p`
+export const LabelS = styled.p`
   font-size: 0.813rem;
   color: #ffffff;
   font-weight: 500;
