@@ -74,14 +74,14 @@ const Row = ({
   const handleSeeCommittee = (item: any) => {
     setAction('search')
     setCurrentEntity({ id: data.id, name: item })
-    navigate(Paths.COMMITTEE)
+    navigate(Paths.COMMITTEES_PATH)
   }
 
   
   const handleSeeMember = (item: any) => {
     setAction('search')
     setCurrentEntity({ id: data.id, name: item })
-    navigate(Paths.MEMBERS)
+    navigate(Paths.MEMBERS_PATH)
   }
 
   const getRowContent = (label: string | number, index: number) => {

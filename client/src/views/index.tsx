@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Paths from '../routes/Paths'
 import ComitteesView from './Committees'
 import NotFoundView from './NotFound'
@@ -18,10 +18,11 @@ const Main: React.FC = () => {
           <Router>
             <NavBar data={navIcon} />
             <Routes> 
-              <Route path={Paths.COMMITTEE} element={<ComitteesView />} />
-              <Route path={Paths.MEMBERS} element={<MembersView />} />
+              <Route path={'/'} element={<Navigate to={Paths.COMMITTEES_PATH} replace />} />
+              <Route path={Paths.COMMITTEES_PATH} element={<ComitteesView />} />
+              <Route path={Paths.MEMBERS_PATH} element={<MembersView />} />
               <Route
-                path={Paths.CONFIGURATIONS}
+                path={Paths.CONFIGURATIONS_PATH}
                 element={<ConfigurationsView />}
               />
               <Route path={'*'} element={<NotFoundView />} />

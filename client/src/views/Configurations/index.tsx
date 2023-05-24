@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { EntityContext } from '../../context/CommitteeContext'
 import CommitteeCustom from './CommitteeCustom'
 import CommitteeFromTemplate from './CommitteeFromTemplate'

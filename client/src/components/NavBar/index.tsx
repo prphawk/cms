@@ -1,25 +1,20 @@
 import Icon from '../Icon'
-import { INavBar, TabType } from './types'
+import { INavBar } from './types'
 import { ContainerS, LabelS, LinkContainerS, LinkS } from './styles'
 import { useState, useEffect, useContext } from 'react'
 import { EntityContext } from '../../context/CommitteeContext'
 import { getEmptyEntity } from '../../utils/EmptyEntity'
+import Paths from '../../routes/Paths'
 
 const NavBar = ({ data }: INavBar) => {
-  const [tabSelected, setTabSelected] = useState<TabType>('committee')
+  const [tabSelected, setTabSelected] = useState(Paths.COMMITTEES)
   const { setAction, setCurrentEntity } = useContext(EntityContext)
 
-  const handleClick = () => {
+  const handleClick = (pageId: string) => {
     setAction(null)
     setCurrentEntity(getEmptyEntity())
-    
+    setTabSelected(pageId)
   }
-
-  useEffect(() => {
-    let path = window.location.pathname
-    const currentTab = path === '/' ? 'committee' : path.slice(1)
-    setTabSelected(currentTab as TabType)
-  }, [tabSelected])
 
   return (
     <ContainerS>
@@ -29,7 +24,7 @@ const NavBar = ({ data }: INavBar) => {
               to={page.href}
               selected={tabSelected === page.id}
               key={`${page.icon}-link`}
-              onClick={() => {handleClick(); console.log(tabSelected, page.id)}}
+              onClick={() => handleClick(page.id)}
             >
               <Icon type={page.icon} />
               <LabelS>{page.label}</LabelS>
