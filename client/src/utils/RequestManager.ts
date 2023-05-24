@@ -10,7 +10,7 @@ class requestManager {
         this.axios_socket = axios.create()
     }
 
-    private async makeGetRequest(access_point: string, params:any = {}) { //TODO: Give 'params' a type, an amalgam of possible types.
+    private async makeGetRequest(access_point: string, params?: {}) { //TODO: Give 'params' a type, an amalgam of possible types.
         let result = await this.axios_socket
             .get(access_point, {params})
                 .then(res => res.data)
@@ -30,14 +30,14 @@ class requestManager {
 
     private async makeDeleteRequest(access_point: string, params:any) { //TODO: Give 'params' a type, an amalgam of possible types.
         let result = await this.axios_socket
-            .delete(access_point, params=params)
+            .delete(access_point, params)
                 .then(res => res.data)
                 .catch(err => console.log(err))
     }
 
     private async makePatchRequest(access_point: string, params:any, data:any) { //TODO: Give 'params' a type, an amalgam of possible types.
         let result = await this.axios_socket
-            .patch(access_point, data, {params:params})
+            .patch(access_point, data, {params})
                 .then(res => res.data)
                 .catch(err => console.log(err))
 
@@ -54,7 +54,7 @@ class requestManager {
 
     async getOneMember(member_id: number) {
         let params={id: member_id}
-        return await this.makeGetRequest(BackendPaths.MEMBER, params=params) as memberGetOneMemberDetailsType
+        return await this.makeGetRequest(BackendPaths.MEMBER, params) as memberGetOneMemberDetailsType
     }
 
     async getAllCommittees() {
@@ -67,53 +67,53 @@ class requestManager {
 
     async getOneCommittee(committee_id: number) { //TODO: Add a type for each type of 'params'.
         let params= {id: committee_id}
-        return await this.makeGetRequest(BackendPaths.COMMITTEE, params=params) //TODO: Add a type to this answer when it starts being used
+        return await this.makeGetRequest(BackendPaths.COMMITTEE, params) //TODO: Add a type to this answer when it starts being used
     }
 
     async createMember(member_name: string) { //TODO: What type should POST, PATCH, and DELETE functions return?
         let data={data: {name: member_name, is_active: true}} as memberPostDTO
-        return await this.makePostRequest(BackendPaths.MEMBER, data=data)
+        return await this.makePostRequest(BackendPaths.MEMBER, data)
     }
 
     async updateMemberOnCommittee(member_id: number, committee_id: number, data_memberoncommittee: memberOnCommittee_PatchDTO) { 
         let params= {member_id: member_id, committee_id: committee_id}
         let data={data: data_memberoncommittee}
-        return await this.makePatchRequest(BackendPaths.MEMBER_ON_COMMITTEES, params=params, data=data)
+        return await this.makePatchRequest(BackendPaths.MEMBER_ON_COMMITTEES, params, data)
     }
 
     async deleteMember(member_id: number) {
         let params={id: member_id}
-        return await this.makeDeleteRequest(BackendPaths.MEMBER, params=params)
+        return await this.makeDeleteRequest(BackendPaths.MEMBER, params)
     }
 
     async deactivateMember(member_info: memberGetOptionsEntry) { // TODO: Declare an interface to be used here and in OptionsMenu.
         let params={id: member_info.id}
         let data={data: {name: member_info.name, is_active: false}} as memberPostDTO
-        return await this.makePatchRequest(BackendPaths.MEMBER, params=params, data=data)
+        return await this.makePatchRequest(BackendPaths.MEMBER, params, data)
     }
 
     async debug_reactivateMember(member_info: memberGetOptionsEntry) { // TODO: Verify whether this function will be necessary
         let params={id: member_info.id}
         let data={data: {name: member_info.name, is_active: true}} as memberPostDTO
-        return await this.makePatchRequest(BackendPaths.MEMBER, params=params, data=data)
+        return await this.makePatchRequest(BackendPaths.MEMBER, params, data)
     }
 
     async createCommittee(committee_data: committeePostDTO) {
         let data={data: committee_data}
-        return await this.makePostRequest(BackendPaths.COMMITTEE, data=data)
+        return await this.makePostRequest(BackendPaths.COMMITTEE, data)
     }
 
     async deactivateCommittee(committee_id: number, committee_bond: string){
         let params={id: committee_id}
         console.log(committee_id)
         let data={data: {id: committee_id, bond: committee_bond, is_active: false}}
-        return await this.makePatchRequest(BackendPaths.COMMITTEE, params=params, data=data)
+        return await this.makePatchRequest(BackendPaths.COMMITTEE, params, data)
     }
 
     async debug_reactivateCommittee(committee_id: number, committee_bond: string) {
         let params={id: committee_id}
         let data={data: {id: committee_id, bond: committee_bond, is_active: true}}
-        return await this.makePatchRequest(BackendPaths.COMMITTEE, params=params, data=data)
+        return await this.makePatchRequest(BackendPaths.COMMITTEE, params, data)
     }
 
 }

@@ -25,7 +25,6 @@ export const getOneCommitteeParticipations = async (members: committeeGetAllAnsw
     }
 
     let formated_detail:(committeeParticipation|undefined) = formatMemberOnCommitteeDetails(member_details, memberOnCommittee_details)
-    console.log(formated_detail)
 
     if(formated_detail !== undefined) {
       committee_details_array.push(formated_detail)

@@ -1,6 +1,6 @@
 
 class BackendPaths {
-    ROOT = 'localhost:5000'
+    ROOT = process.env.REACT_APP_API_URL
     COMMITTEE = this.ROOT + '/committee'
     MEMBER = this.ROOT + '/member'
     MEMBER_ON_COMMITTEES = this.ROOT + '/member_on_committee'
