@@ -54,8 +54,6 @@ const Row = ({
     }
   }
 
-  update_options()
-  
   const handleSeeFunctionHistory = (item: any) => {
     setAction('function-history')
     setCurrentEntity({ id: data.id, name: item })
@@ -87,6 +85,8 @@ const Row = ({
   const getRowContent = (label: string | number, index: number) => {
     let columnInfo = headers[index]
     if (editMode && columnInfo.editable) {
+      update_options()
+
       switch (columnInfo.type) {
         case 'text':
           return (

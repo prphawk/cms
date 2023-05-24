@@ -26,8 +26,6 @@ const OptionsMenu = () => {
 		}
 	}
 
-	update_options()
-
 	const handleAddMember = () => {
 		RequestManager.createMember(memberName)
 		setDisplayPopup(null)
@@ -36,6 +34,8 @@ const OptionsMenu = () => {
 	const handleDeactivateMember = () => {
 		RequestManager.deactivateMember(activeMemberSelected)
 		setDisplayPopup(null)
+		update_options()
+
 	}
 
 	return (

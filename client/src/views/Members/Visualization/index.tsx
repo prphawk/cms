@@ -88,6 +88,8 @@ const Visualization = () => {
     if (action === 'search') {
       setSearchText(currentMember.name)
     }
+
+    console.log("request")
   }, [])
 
   useEffect(() => {
