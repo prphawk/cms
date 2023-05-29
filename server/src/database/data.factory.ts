@@ -1,21 +1,21 @@
 import { faker } from '@faker-js/faker';
-import { Committee, Member } from '@prisma/client';
+import { Committee, Employee } from '@prisma/client';
 import { CommitteeCreateDTO } from 'src/DTOs/committee.dto'
-import { MemberCreateDTO } from 'src/DTOs/member.dto'
+import { EmployeeCreateDTO } from 'src/DTOs/employee.dto'
 import { MemberOnCommitteeCreateDTO, MemberOnCommitteeUniqueDTO } from 'src/DTOs/member_on_committee.dto'
 
 export class DataFactory {
    constructor() {}
 
-   newMockMember() {
+   newMockEmployee() {
       return {
          name: faker.name.fullName(),
          is_active: faker.datatype.boolean(),
-      } as MemberCreateDTO;
+      } as EmployeeCreateDTO;
    }
 
-   newMockMemberWithId() {
-      const mock = this.newMockMember() as Member;
+   newMockEmployeeWithId() {
+      const mock = this.newMockEmployee() as Employee;
       mock.id = +faker.random.numeric(3);
       return mock;
    }
@@ -39,13 +39,13 @@ export class DataFactory {
       return mock;
    }
 
-   newMockMemberOnCommittee(mockMember?: Member, mockCommittee?: Committee) {
-      if (!mockMember) mockMember = this.newMockMemberWithId();
+   newMockMemberOnCommittee(mockEmployee?: Employee, mockCommittee?: Committee) {
+      if (!mockEmployee) mockEmployee = this.newMockEmployeeWithId();
       if (!mockCommittee) mockCommittee = this.newMockCommitteeWithId();
 
       return {
          where: {
-            member_id: mockMember.id,
+            employee_id: mockEmployee.id,
             committee_id: mockCommittee.id,
          } as MemberOnCommitteeUniqueDTO,
          data: {

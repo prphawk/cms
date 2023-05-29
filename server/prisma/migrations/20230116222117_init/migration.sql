@@ -1,11 +1,11 @@
 /*
   Warnings:
 
-  - You are about to drop the column `email` on the `member` table. All the data in the column will be lost.
+  - You are about to drop the column `email` on the `employee` table. All the data in the column will be lost.
 
 */
 -- DropIndex
-DROP INDEX `Member_email_key` ON `member`;
+DROP INDEX `Member_email_key` ON `employee`;
 
 -- AlterTable
-ALTER TABLE `member` DROP COLUMN `email`;
+ALTER TABLE `employee` DROP COLUMN `email`;

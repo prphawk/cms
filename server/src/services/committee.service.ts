@@ -6,7 +6,7 @@ import { Committee, Prisma } from '@prisma/client';
 export class CommitteeService {
    constructor(private prisma: PrismaService) {}
 
-   async committee(params: Prisma.CommitteeFindUniqueArgs): Promise<Committee | null> {
+   async committee(params: Prisma.CommitteeFindUniqueOrThrowArgs): Promise<Committee | null> {
       return this.prisma.committee.findUnique(params);
    }
 

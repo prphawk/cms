@@ -3,7 +3,6 @@ import {
    Get,
    Post,
    Body,
-   Delete,
    Patch,
    ParseIntPipe,
    Query,
@@ -42,12 +41,12 @@ export class MemberOnCommitteeController {
             begin_date: true,
             term: true,
             observations: true,
-            member: { select: { 
+            employee: { select: { 
                id: true,
                name: true } }
          },
          orderBy: {
-            member: {
+            employee: {
                name: "asc"
             }
          }
@@ -63,7 +62,7 @@ export class MemberOnCommitteeController {
    ): Promise<MemberOnCommitteeModel> {
       return this.memberOnCommitteeService.create({
          ...data as MemberOnCommitteeCreateDTO,
-         member: { connect: { id: member_id } },
+         employee: { connect: { id: member_id } },
          committee: { connect: { id: committee_id } },
       });
    }

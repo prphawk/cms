@@ -1,7 +1,7 @@
 import { PartialType } from '@nestjs/mapped-types'
 import { IsBoolean, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
-export class MemberCreateDTO {
+export class EmployeeCreateDTO {
    @IsNotEmpty()
    @IsString()
    name: string;
@@ -11,4 +11,4 @@ export class MemberCreateDTO {
    is_active?: boolean;
 }
 
-export class MemberUpdateDTO extends PartialType(MemberCreateDTO) {}
+export class EmployeeUpdateDTO extends PartialType(EmployeeCreateDTO) {}

@@ -30,7 +30,7 @@ export class MemberOnCommitteeCreateDTO {
 export class MemberOnCommitteeUniqueDTO {
   @IsNotEmpty()
   @IsInt()
-  member_id: number;
+  employee_id: number;
 
   @IsNotEmpty()
   @IsInt()

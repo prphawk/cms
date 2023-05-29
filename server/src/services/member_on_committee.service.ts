@@ -6,8 +6,8 @@ import { MemberOnCommittee, Prisma } from '@prisma/client';
 export class MemberOnCommitteeService {
    constructor(private prisma: PrismaService) {}
 
-   private async memberOnCommittee(
-      params: Prisma.MemberOnCommitteeFindUniqueArgs,
+   async memberOnCommittee(
+      params: Prisma.MemberOnCommitteeFindUniqueOrThrowArgs,
    ): Promise<MemberOnCommittee | null> {
       return this.prisma.memberOnCommittee.findUnique(params);
    }

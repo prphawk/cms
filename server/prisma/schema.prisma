@@ -20,7 +20,7 @@ model Employee {
   id    Int     @default(autoincrement()) @id
   name  String
   is_active Boolean @default(true)
-  committees CommitteeMember[]
+  committees MemberOnCommittee[]
 }
 
 model Committee {
@@ -33,12 +33,12 @@ model Committee {
   ordinance String? //Portaria 
   observations String?
   is_active Boolean @default(true)
-  members CommitteeMember[]
+  members MemberOnCommittee[]
 }
 
-model CommitteeMember {
-  member Employee @relation(fields: [member_id], references: [id])
-  member_id Int // relation scalar field (used in the `@relation` attribute above)
+model MemberOnCommittee {
+  employee Employee @relation(fields: [employee_id], references: [id])
+  employee_id Int // relation scalar field (used in the `@relation` attribute above) @map("member_id")
   committee Committee @relation(fields: [committee_id], references: [id])
   committee_id Int // relation scalar field (used in the `@relation` attribute above)
   role  String? @default("Membro") //Cargo
@@ -47,6 +47,6 @@ model CommitteeMember {
   observations String?
   is_active Boolean @default(true)
 
-  @@id([member_id, committee_id])
+  @@id([employee_id, committee_id])
 	@@map("MembersOnCommittees")
 }

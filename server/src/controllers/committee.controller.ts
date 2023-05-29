@@ -23,7 +23,7 @@ export class CommiteeController {
       return this.committeeService.committee({
          where: { id },
          include: { 
-            members: { include: { member: true } }
+            members: { include: { employee: true } }
          },
       });
    }
@@ -35,7 +35,7 @@ export class CommiteeController {
          where: { is_active: true },
          orderBy: { name: "asc" },
          include: { members: {
-            select: { member: true },
+            select: { employee: true },
           }},
       });
    }
