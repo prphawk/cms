@@ -53,7 +53,7 @@ const Edit = () => {
         <HeaderSecondary
           headerTitle={`EDIÇÃO - ${currentEntity.name}`}
           buttonType="save"
-          backButtonMsg="voltar a membros em comissões"
+          backButtonMsg="voltar a servidores"
           handleSave={handleSaveChanges}
           handleCancel={() => setDisplayPopup(true)}
         />

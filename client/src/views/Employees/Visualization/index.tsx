@@ -133,15 +133,15 @@ const Visualization = () => {
     <>
       {exportPDF ? (
         <div ref={table}>
-          <Title type="secondary">Comissões por pessoa</Title>
+          <Title type="secondary">Servidores</Title>
           <ExportableTable type={'members'} content={displayedContent} />
         </div>
       ) : (
         <>
           {displayPopup && (
             <Popup
-              title={'Desativar Funcionário'}
-              action={'Desativar Funcionário'}
+              title={'Desativar Servidor'}
+              action={'Desativar Servidor'}
               actionType={'important'}
               handleActionClick={handleDeactivateMember}
               handleCancelClick={closePopUp}
@@ -153,8 +153,8 @@ const Visualization = () => {
           )}
           <MainContainer displayingPopup={displayPopup}>
             <HeaderPrimary
-              headerTitle="Comissões por pessoa"
-              searchPlaceholder="Pesquise pelo nome do funcionário..."
+              headerTitle="Servidores"
+              searchPlaceholder="Pesquise pelo nome do servidor..."
               searchText={searchtext}
               setSearchText={(input) => setSearchText(input)}
               handleExport={(type) => {

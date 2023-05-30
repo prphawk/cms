@@ -42,8 +42,8 @@ const OptionsMenu = () => {
 		<>
 			{displayPopup === "add" ? (
 				<Popup
-					title={"Adicionar Funcionário"}
-					action={"Adicionar Funcionário"}
+					title={"Adicionar Servidor"}
+					action={"Adicionar Servidor"}
 					actionType={"save"}
 					handleActionClick={handleAddMember}
 					handleCancelClick={() => setDisplayPopup(null)}
@@ -59,14 +59,14 @@ const OptionsMenu = () => {
 			) : (
 				displayPopup === "deactivate" && (
 					<Popup
-						title={"Desativar Funcionário"}
-						action={"Desativar Funcionário"}
+						title={"Desativar Servidor"}
+						action={"Desativar Servidor"}
 						actionType={"save"}
 						handleActionClick={handleDeactivateMember}
 						handleCancelClick={() => setDisplayPopup(null)}
 					>
 						<Dropdown
-							placeholder={"Selecione um funcionário"}
+							placeholder={"Selecione um servidor"}
 							options={optionsList}
 							optionSelected={activeMemberSelected}
 							setOptionSelected={setActiveMemberSelected}
@@ -78,28 +78,28 @@ const OptionsMenu = () => {
 				<Title type="primary">Configurações de Entidades</Title>
 				<ButtonContainer>
 					<Button
-						title="adicionar comitê a partir de template"
+						title="adicionar comissão a partir de template"
 						handleClick={() => setAction("add-from-template")}
 						fontSize="large"
 					>
-						Adicionar comitê a partir de órgão existente
+						Adicionar comissão a partir de órgão existente
 					</Button>
-					<Button title="Adicionar novo comitê" handleClick={() => setAction("add-custom")} fontSize="large">
-						Adicionar novo comitê
+					<Button title="Adicionar nova comissão" handleClick={() => setAction("add-custom")} fontSize="large">
+						Adicionar nova comissão
 					</Button>
 					<Button
-						title="adicionar novo funcionário"
+						title="adicionar novo servidor"
 						handleClick={() => setDisplayPopup("add")}
 						fontSize="large"
 					>
-						Adicionar funcionário
+						Adicionar servidor
 					</Button>
 					<Button
-						title="desativar funcionário"
+						title="desativar servidor"
 						handleClick={() => setDisplayPopup("deactivate")}
 						fontSize="large"
 					>
-						Desativar funcionário
+						Desativar servidor
 					</Button>
 				</ButtonContainer>
 			</MainContainer>
