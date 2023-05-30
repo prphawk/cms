@@ -1,4 +1,4 @@
-export const member_list_mock = [
+export const employee_list_mock = [
   { id: 1, name: 'Alberto Egon Schaeffer Filho' },
   { id: 2, name: 'Alexandre da Silva Carissimi' },
   { id: 3, name: 'Alexsander Borges Ribeiro' },

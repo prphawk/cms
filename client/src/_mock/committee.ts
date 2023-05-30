@@ -2,7 +2,7 @@ export const committee_mock = [
   {
     id: 1,
     content: [
-      'DIREÇÃO/CONIN',
+      'DIREÇÃO/CONINF',
       'UFRGS',
       '009/2022 – INF',
       '20/12/2020 a 19/12/2024',

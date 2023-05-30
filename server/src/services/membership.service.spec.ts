@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PrismaService } from '../database/prisma.service';
 import { DataFactory } from '../database/data.factory';
-import { MemberOnCommitteeService } from './member_on_committee.service';
+import { MemberOnCommitteeService } from './membership.service';
 import { CommitteeService } from './committee.service';
 import { EmployeeService } from './employee.service';
-import { MemberOnCommitteeCreateDTO } from 'src/DTOs/member_on_committee.dto'
+import { MemberOnCommitteeCreateDTO } from 'src/DTOs/membership.dto'
 
 describe('MemberOnCommitteeService', () => {
    let employeeService: EmployeeService;

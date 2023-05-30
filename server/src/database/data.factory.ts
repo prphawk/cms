@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 import { Committee, Employee } from '@prisma/client';
 import { CommitteeCreateDTO } from 'src/DTOs/committee.dto'
 import { EmployeeCreateDTO } from 'src/DTOs/employee.dto'
-import { MemberOnCommitteeCreateDTO, MemberOnCommitteeUniqueDTO } from 'src/DTOs/member_on_committee.dto'
+import { MemberOnCommitteeCreateDTO, MemberOnCommitteeUniqueDTO } from 'src/DTOs/membership.dto'
 
 export class DataFactory {
    constructor() {}

@@ -8,7 +8,7 @@ import { EntityContext } from "../../../context/CommitteeContext"
 import { MainContainer } from "../../../styles/commonStyles"
 import { getEmptyEntity } from "../../../utils/EmptyEntity"
 import RequestManager from "../../../utils/RequestManager"
-import { member_list_mock } from "../../../_mock/memberList"
+import { employee_list_mock } from "../../../_mock/memberList"
 import { ButtonContainer } from "./styles"
 import { memberGetOptionsEntry } from "../../../types/requestAnswerTypes"
 

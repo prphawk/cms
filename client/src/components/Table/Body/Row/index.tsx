@@ -14,7 +14,7 @@ import {
 } from './styles'
 import Dropdown from '../../Input/Dropdown'
 import TextInput from '../../Input/TextInput'
-import { member_list_mock } from '../../../../_mock/memberList'
+import { employee_list_mock } from '../../../../_mock/memberList'
 import { useContext, useState } from 'react'
 import { EntityContext } from '../../../../context/CommitteeContext'
 import Paths from '../../../../routes/Paths'

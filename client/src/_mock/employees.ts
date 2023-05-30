@@ -1,4 +1,4 @@
-export const member_mock = [
+export const employee_mock = [
   { id: 1, content: ['Alberto Egon Schaeffer Filho', 2] },
   { id: 2, content: ['Alexandre da Silva Carissimi', 4] },
   { id: 3, content: ['Alexsander Borges Ribeiro', 1] },
@@ -8,7 +8,7 @@ export const member_mock = [
   { id: 7, content: ['Anderson Roberto Pinheiro Domingues', 1] },
 ]
 
-export const member_details_mock = {
+export const employee_details_mock = {
   active_participations: [
     {
       id: 1,

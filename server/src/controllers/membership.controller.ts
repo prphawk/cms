@@ -7,9 +7,9 @@ import {
    ParseIntPipe,
    Query,
 } from '@nestjs/common';
-import { MemberOnCommitteeService } from '../services/member_on_committee.service';
+import { MemberOnCommitteeService } from '../services/membership.service';
 import { MemberOnCommittee as MemberOnCommitteeModel } from '@prisma/client';
-import { MemberOnCommitteeCreateDTO, MemberOnCommitteeUpdateDTO } from 'src/DTOs/member_on_committee.dto'
+import { MemberOnCommitteeCreateDTO, MemberOnCommitteeUpdateDTO } from 'src/DTOs/membership.dto'
 import { ValidatePayloadExistsPipe } from 'src/pipes/validate_payload_exists'
 
 @Controller('member_on_committee')
@@ -69,12 +69,12 @@ export class MemberOnCommitteeController {
 
    @Patch()
    async update(
-      @Query('member_id', ParseIntPipe) member_id: number,
+      @Query('employee_id', ParseIntPipe) employee_id: number,
       @Query('committee_id', ParseIntPipe) committee_id: number,
       @Body('data', ValidatePayloadExistsPipe) data: MemberOnCommitteeUpdateDTO,
    ): Promise<MemberOnCommitteeModel> {
       return this.memberOnCommitteeService.update({
-         where: { member_id_committee_id: { member_id, committee_id } },
+         where: { employee_id_committee_id: { employee_id, committee_id } },
          data
       });
    }
