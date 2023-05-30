@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { MemberDetailsHeader } from '../../data/membersDetailsHeader'
+import { MemberDetailsHeader } from '../../data/employeesDetailsHeader'
 import { NoContentMessage } from '../../styles/commonStyles'
 import Button from '../Button'
 import Icon from '../Icon'

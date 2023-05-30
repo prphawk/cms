@@ -1,10 +1,10 @@
 class Path {
   COMMITTEES = 'committees'
-  MEMBERS = 'members'
+  EMPLOYEES = 'employees'
   CONFIGURATIONS = 'configurations'
 
   COMMITTEES_PATH = '/' + this.COMMITTEES
-  MEMBERS_PATH = '/' + this.MEMBERS
+  EMPLOYEES_PATH = '/' + this.EMPLOYEES
   CONFIGURATIONS_PATH = '/' + this.CONFIGURATIONS
 }
 export default new Path()

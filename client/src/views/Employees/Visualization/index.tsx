@@ -11,8 +11,8 @@ import { getEmptyEntity } from '../../../utils/EmptyEntity'
 import RequestManager from '../../../utils/RequestManager'
 import { formatMember } from '../../../utils/FormatUtils'
 import { memberType } from '../../../types/contentTypes'
-import { memberGetAllAnswerEntry } from '../../../types/requestAnswerTypes'
-import { MemberTableHeader } from '../../../data/membersHeader'
+import { employeeGetAllAnswerEntry } from '../../../types/requestAnswerTypes'
+import { MemberTableHeader } from '../../../data/employeesHeader'
 import { delay } from '../../../utils/TimeUtils'
 
 const Visualization = () => {
@@ -72,7 +72,7 @@ const Visualization = () => {
   useEffect(() => {
     const request_answer = async () => {
       await delay(150)
-      let member_content_raw: memberGetAllAnswerEntry[] =
+      let member_content_raw: employeeGetAllAnswerEntry[] =
         await RequestManager.getAllMembers()
       let member_content: memberType[] = []
 

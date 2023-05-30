@@ -8,7 +8,7 @@ export const navIcon: NavItem[] = [
     label: 'Comissões',
     href: Paths.COMMITTEES_PATH,
   },
-  { id: 'members', icon: 'members', label: 'Membros', href: Paths.MEMBERS_PATH },
+  { id: 'members', icon: 'members', label: 'Membros', href: Paths.EMPLOYEES_PATH },
   {
     id: 'configurations',
     icon: 'configurations',

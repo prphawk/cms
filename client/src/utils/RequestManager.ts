@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
 import BackendPaths from '../routes/BackendPaths';
-import { committeeGetAllAnswerEntry, committeePatchDTO, committeePostDTO, memberGetAllAnswerEntry, memberGetOneMemberDetailsType, memberGetOptionsEntry, memberOnCommittee_PatchDTO, memberPostDTO } from '../types/requestAnswerTypes';
+import { committeeGetAllAnswerEntry, committeePatchDTO, committeePostDTO, employeeGetAllAnswerEntry, employeeGetOneMemberDetailsType, employeeGetOptionsEntry, membership_PatchDTO, employeePostDTO } from '../types/requestAnswerTypes';
 
 class requestManager {
 
@@ -45,16 +45,16 @@ class requestManager {
     }
 
     async getAllMembers() {
-        return await this.makeGetRequest(BackendPaths.MEMBER_HISTORY) as memberGetAllAnswerEntry[]
+        return await this.makeGetRequest(BackendPaths.EMPLOYEE_HISTORY) as employeeGetAllAnswerEntry[]
     }
 
     async getMemberList() {
-        return await this.makeGetRequest(BackendPaths.MEMBER_OPTIONS) as memberGetOptionsEntry[]
+        return await this.makeGetRequest(BackendPaths.EMPLOYEE_OPTIONS) as employeeGetOptionsEntry[]
     }
 
     async getOneMember(member_id: number) {
         let params={id: member_id}
-        return await this.makeGetRequest(BackendPaths.MEMBER, params) as memberGetOneMemberDetailsType
+        return await this.makeGetRequest(BackendPaths.EMPLOYEE, params) as employeeGetOneMemberDetailsType
     }
 
     async getAllCommittees() {
@@ -71,31 +71,31 @@ class requestManager {
     }
 
     async createMember(member_name: string) { //TODO: What type should POST, PATCH, and DELETE functions return?
-        let data={data: {name: member_name, is_active: true}} as memberPostDTO
-        return await this.makePostRequest(BackendPaths.MEMBER, data)
+        let data={data: {name: member_name, is_active: true}} as employeePostDTO
+        return await this.makePostRequest(BackendPaths.EMPLOYEE, data)
     }
 
-    async updateMemberOnCommittee(member_id: number, committee_id: number, data_memberoncommittee: memberOnCommittee_PatchDTO) { 
+    async updateMemberOnCommittee(member_id: number, committee_id: number, data_memberoncommittee: membership_PatchDTO) { 
         let params= {member_id: member_id, committee_id: committee_id}
         let data={data: data_memberoncommittee}
-        return await this.makePatchRequest(BackendPaths.MEMBER_ON_COMMITTEES, params, data)
+        return await this.makePatchRequest(BackendPaths.MEMBERSHIP, params, data)
     }
 
     async deleteMember(member_id: number) {
         let params={id: member_id}
-        return await this.makeDeleteRequest(BackendPaths.MEMBER, params)
+        return await this.makeDeleteRequest(BackendPaths.EMPLOYEE, params)
     }
 
-    async deactivateMember(member_info: memberGetOptionsEntry) { // TODO: Declare an interface to be used here and in OptionsMenu.
+    async deactivateMember(member_info: employeeGetOptionsEntry) { // TODO: Declare an interface to be used here and in OptionsMenu.
         let params={id: member_info.id}
-        let data={data: {name: member_info.name, is_active: false}} as memberPostDTO
-        return await this.makePatchRequest(BackendPaths.MEMBER, params, data)
+        let data={data: {name: member_info.name, is_active: false}} as employeePostDTO
+        return await this.makePatchRequest(BackendPaths.EMPLOYEE, params, data)
     }
 
-    async debug_reactivateMember(member_info: memberGetOptionsEntry) { // TODO: Verify whether this function will be necessary
+    async debug_reactivateMember(member_info: employeeGetOptionsEntry) { // TODO: Verify whether this function will be necessary
         let params={id: member_info.id}
-        let data={data: {name: member_info.name, is_active: true}} as memberPostDTO
-        return await this.makePatchRequest(BackendPaths.MEMBER, params, data)
+        let data={data: {name: member_info.name, is_active: true}} as employeePostDTO
+        return await this.makePatchRequest(BackendPaths.EMPLOYEE, params, data)
     }
 
     async createCommittee(committee_data: committeePostDTO) {

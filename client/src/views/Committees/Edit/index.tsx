@@ -8,7 +8,7 @@ import { FontBold, MainContainer } from '../../../styles/commonStyles'
 import { committeeType } from '../../../types/contentTypes'
 import { getEmptyEntity } from '../../../utils/EmptyEntity'
 import RequestManager from '../../../utils/RequestManager'
-import { memberOnCommittee_PatchDTO } from '../../../types/requestAnswerTypes'
+import { membership_PatchDTO } from '../../../types/requestAnswerTypes'
 import { formatDate_memberOnCommittee_PatchDTO, formatMemberOnCommittee_PatchDTO } from '../../../utils/FormatUtils'
 
 const Edit = () => {

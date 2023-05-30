@@ -1,12 +1,12 @@
-export interface memberGetOneMemberDetailsType {
+export interface employeeGetOneMemberDetailsType {
     id: number,
     name: string,
     is_active: boolean,
-    committees: memberGetOneMemberDetailsType_committeeDetails[]
+    committees: employeeGetOneMemberDetailsType_committeeDetails[]
 }
 
-export type memberGetOneMemberDetailsType_committeeDetails = {
-    member_id: number,
+export type employeeGetOneMemberDetailsType_committeeDetails = {
+    employee_id: number,
     committee_id: number,
     role: string,
     begin_date?: string,
@@ -23,14 +23,14 @@ export interface committeeGetAllAnswerEntry_member {
     } 
 }
 
-export interface memberPostDTO {
+export interface employeePostDTO {
     data: {
         name: string;
         is_active: boolean;
     }
 }
 
-export interface memberGetOptionsEntry {
+export interface employeeGetOptionsEntry {
     id: number,
     name: string
 }
@@ -59,7 +59,7 @@ export interface committeeGetOneAnswer {
     is_active: boolean
 }
 
-export type memberGetAllAnswerEntry_memberDetails = {
+export type employeeGetAllAnswerEntry_memberDetails = {
     role: string,
     begin_date?: string,
     observations?: string,
@@ -69,16 +69,16 @@ export type memberGetAllAnswerEntry_memberDetails = {
     }
 }
 
-export interface memberGetAllAnswerEntry {
+export interface employeeGetAllAnswerEntry {
     id: number,
     name: string,
     committees: {
-        active: memberGetAllAnswerEntry_memberDetails[],
-        inactive: memberGetAllAnswerEntry_memberDetails[]
+        active: employeeGetAllAnswerEntry_memberDetails[],
+        inactive: employeeGetAllAnswerEntry_memberDetails[]
     }
 }
 
-export interface memberOnCommittee_PatchDTO{
+export interface membership_PatchDTO{
     role: string;
     begin_date?: Date;
     term: number;

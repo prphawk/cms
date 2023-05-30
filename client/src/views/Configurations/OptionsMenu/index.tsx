@@ -10,14 +10,14 @@ import { getEmptyEntity } from "../../../utils/EmptyEntity"
 import RequestManager from "../../../utils/RequestManager"
 import { employee_list_mock } from "../../../_mock/memberList"
 import { ButtonContainer } from "./styles"
-import { memberGetOptionsEntry } from "../../../types/requestAnswerTypes"
+import { employeeGetOptionsEntry } from "../../../types/requestAnswerTypes"
 
 const OptionsMenu = () => {
 	const { setAction } = useContext(EntityContext)
 	const [displayPopup, setDisplayPopup] = useState<"add" | "deactivate" | null>(null)
-	const [activeMemberSelected, setActiveMemberSelected] = useState(getEmptyEntity() as memberGetOptionsEntry)
+	const [activeMemberSelected, setActiveMemberSelected] = useState(getEmptyEntity() as employeeGetOptionsEntry)
 	const [memberName, setMemberName] = useState("")
-	const [optionsList, setOptionsList] = useState([] as memberGetOptionsEntry[])
+	const [optionsList, setOptionsList] = useState([] as employeeGetOptionsEntry[])
 
 	const update_options = async () => {
 		let options_answer = await RequestManager.getMemberList()

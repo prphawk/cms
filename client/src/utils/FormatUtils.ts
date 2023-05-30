@@ -7,12 +7,12 @@ import {
   memberType,
 } from '../types/contentTypes'
 import {
-  memberGetOneMemberDetailsType_committeeDetails,
+  employeeGetOneMemberDetailsType_committeeDetails,
   committeeGetAllAnswerEntry,
-  memberGetOneMemberDetailsType,
-  memberGetAllAnswerEntry_memberDetails,
-  memberGetAllAnswerEntry,
-  memberOnCommittee_PatchDTO,
+  employeeGetOneMemberDetailsType,
+  employeeGetAllAnswerEntry_memberDetails,
+  employeeGetAllAnswerEntry,
+  membership_PatchDTO,
 } from '../types/requestAnswerTypes'
 
 function formatDate(date: string) {
@@ -28,10 +28,10 @@ function formatDate(date: string) {
   return formated_date
 }
 
-export function formatMember(member_list: memberGetAllAnswerEntry[]) {
+export function formatMember(member_list: employeeGetAllAnswerEntry[]) {
   let formated_member_info: memberType[] = []
 
-  member_list.forEach((member: memberGetAllAnswerEntry) => {
+  member_list.forEach((member: employeeGetAllAnswerEntry) => {
     let number_of_comissions = member.committees.active.length
     formated_member_info.push({
       id: member.id,
@@ -47,13 +47,13 @@ export function formatMember(member_list: memberGetAllAnswerEntry[]) {
 }
 
 function formatMemberCommitteeDetails(
-  active: memberGetAllAnswerEntry_memberDetails[],
-  history: memberGetAllAnswerEntry_memberDetails[]
+  active: employeeGetAllAnswerEntry_memberDetails[],
+  history: employeeGetAllAnswerEntry_memberDetails[]
 ) {
   let active_participations: memberParticipation[] = []
   let inactive_participations: memberParticipation[] = []
 
-  active.forEach((detail: memberGetAllAnswerEntry_memberDetails) => {
+  active.forEach((detail: employeeGetAllAnswerEntry_memberDetails) => {
     active_participations.push({
       id: detail.committee.id,
       content: [
@@ -65,7 +65,7 @@ function formatMemberCommitteeDetails(
     })
   })
 
-  history.forEach((detail: memberGetAllAnswerEntry_memberDetails) => {
+  history.forEach((detail: employeeGetAllAnswerEntry_memberDetails) => {
     inactive_participations.push({
       id: detail.committee.id,
       content: [
@@ -83,15 +83,15 @@ function formatMemberCommitteeDetails(
 }
 
 export function formatMemberOnCommitteeDetails(
-  member_details: memberGetOneMemberDetailsType,
+  member_details: employeeGetOneMemberDetailsType,
   memberOnCommittee_details:
-    | memberGetOneMemberDetailsType_committeeDetails
+    | employeeGetOneMemberDetailsType_committeeDetails
     | undefined
 ) {
   if (memberOnCommittee_details === undefined) {
     return undefined
   }
-  let memberOnCommittee_details_c = memberOnCommittee_details as memberGetOneMemberDetailsType_committeeDetails
+  let memberOnCommittee_details_c = memberOnCommittee_details as employeeGetOneMemberDetailsType_committeeDetails
   return {
     id: member_details.id,
     content: [
@@ -181,7 +181,7 @@ export function formatMemberOnCommittee_PatchDTO(
       term: parseInt(memberOnCommitteeContent[3][0]),
       observations: (memberOnCommitteeContent[4] !== "")? memberOnCommitteeContent[4] : null,
       is_active: true
-    } as memberOnCommittee_PatchDTO
+    } as membership_PatchDTO
   }
   else {
     memberOnCommitteeContent = memberOnCommitteeContent as memberParticipation
@@ -189,7 +189,7 @@ export function formatMemberOnCommittee_PatchDTO(
       role: memberOnCommitteeContent.content[1],
       observations: (memberOnCommitteeContent.content[3] !== "")? memberOnCommitteeContent.content[3] : null,
       is_active: true
-    } as memberOnCommittee_PatchDTO
+    } as membership_PatchDTO
   }
 
   return formated_info

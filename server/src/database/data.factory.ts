@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 import { Committee, Employee } from '@prisma/client';
 import { CommitteeCreateDTO } from 'src/DTOs/committee.dto'
 import { EmployeeCreateDTO } from 'src/DTOs/employee.dto'
-import { MemberOnCommitteeCreateDTO, MemberOnCommitteeUniqueDTO } from 'src/DTOs/membership.dto'
+import { MembershipCreateDTO, MembershipUniqueDTO } from 'src/DTOs/membership.dto'
 
 export class DataFactory {
    constructor() {}
@@ -39,7 +39,7 @@ export class DataFactory {
       return mock;
    }
 
-   newMockMemberOnCommittee(mockEmployee?: Employee, mockCommittee?: Committee) {
+   newMockMembership(mockEmployee?: Employee, mockCommittee?: Committee) {
       if (!mockEmployee) mockEmployee = this.newMockEmployeeWithId();
       if (!mockCommittee) mockCommittee = this.newMockCommitteeWithId();
 
@@ -47,13 +47,13 @@ export class DataFactory {
          where: {
             employee_id: mockEmployee.id,
             committee_id: mockCommittee.id,
-         } as MemberOnCommitteeUniqueDTO,
+         } as MembershipUniqueDTO,
          data: {
             role: faker.name.jobType(),
             begin_date: faker.date.past(),
             term: +faker.random.numeric(),
             observations: faker.lorem.sentence(),
-         } as MemberOnCommitteeCreateDTO
+         } as MembershipCreateDTO
       }
    }
 }

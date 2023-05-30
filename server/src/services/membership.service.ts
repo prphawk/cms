@@ -1,38 +1,38 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
-import { MemberOnCommittee, Prisma } from '@prisma/client';
+import { Membership, Prisma } from '@prisma/client';
 
 @Injectable()
-export class MemberOnCommitteeService {
+export class MembershipService {
    constructor(private prisma: PrismaService) {}
 
-   async memberOnCommittee(
-      params: Prisma.MemberOnCommitteeFindUniqueOrThrowArgs,
-   ): Promise<MemberOnCommittee | null> {
-      return this.prisma.memberOnCommittee.findUnique(params);
+   async membership(
+      params: Prisma.MembershipFindUniqueOrThrowArgs,
+   ): Promise<Membership | null> {
+      return this.prisma.membership.findUnique(params);
    }
 
-   async memberOnCommittees(
-      params: Prisma.MemberOnCommitteeFindManyArgs,
-   ): Promise<MemberOnCommittee[]> {
-      return this.prisma.memberOnCommittee.findMany(params);
+   async memberships(
+      params: Prisma.MembershipFindManyArgs,
+   ): Promise<Membership[]> {
+      return this.prisma.membership.findMany(params);
    }
 
-   async create(data: Prisma.MemberOnCommitteeCreateInput): Promise<MemberOnCommittee> {
-      return this.prisma.memberOnCommittee.create({
+   async create(data: Prisma.MembershipCreateInput): Promise<Membership> {
+      return this.prisma.membership.create({
          data,
       });
    }
 
    async update(params: {
-      where: Prisma.MemberOnCommitteeWhereUniqueInput;
-      data: Prisma.MemberOnCommitteeUpdateInput;
-   }): Promise<MemberOnCommittee> {
-      return this.prisma.memberOnCommittee.update(params);
+      where: Prisma.MembershipWhereUniqueInput;
+      data: Prisma.MembershipUpdateInput;
+   }): Promise<Membership> {
+      return this.prisma.membership.update(params);
    }
 
-   async delete(where: Prisma.MemberOnCommitteeWhereUniqueInput): Promise<MemberOnCommittee> {
-      return this.prisma.memberOnCommittee.delete({
+   async delete(where: Prisma.MembershipWhereUniqueInput): Promise<Membership> {
+      return this.prisma.membership.delete({
          where,
       });
    }

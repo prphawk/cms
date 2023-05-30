@@ -24,7 +24,7 @@ import {
 } from '../../../../types/tableTypes'
 import Button from '../../../Button'
 import RequestManager from '../../../../utils/RequestManager'
-import { memberGetOptionsEntry } from '../../../../types/requestAnswerTypes'
+import { employeeGetOptionsEntry } from '../../../../types/requestAnswerTypes'
 
 const Row = ({
   children,
@@ -44,7 +44,7 @@ const Row = ({
   const navigate = useNavigate()
   const { setAction, setCurrentEntity } = useContext(EntityContext)
   const { headers, sizes, type } = tableInfo
-  const [optionsList, setOptionsList] = useState([] as memberGetOptionsEntry[])
+  const [optionsList, setOptionsList] = useState([] as employeeGetOptionsEntry[])
 
   const update_options = async() => {
     let options_answer = await RequestManager.getMemberList()
@@ -79,7 +79,7 @@ const Row = ({
   const handleSeeMember = (item: any) => {
     setAction('search')
     setCurrentEntity({ id: data.id, name: item })
-    navigate(Paths.MEMBERS_PATH)
+    navigate(Paths.EMPLOYEES_PATH)
   }
 
   const getRowContent = (label: string | number, index: number) => {
