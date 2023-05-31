@@ -29,10 +29,10 @@ model Committee {
   name  String //Órgão
   begin_date DateTime?
   end_date DateTime?
-  term Int? @default(1)//Ordem do mandato
   ordinance String? //Portaria 
   observations String?
   is_active Boolean @default(true)
+  is_singleton Boolean @default(true)
   members Membership[]
 }
 

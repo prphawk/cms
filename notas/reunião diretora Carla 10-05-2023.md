@@ -6,11 +6,11 @@ não é necessário mandato na comissão
 
 pessoas herdam periodo da comissão?
 
-comissões permanentes ou temporárias
+(comissões + templates) permanentes ou temporárias
 
-as permanentes tem 2 anos - e os membros herdam o espaço de fim da comissão
+as permanentes tem 2 anos - e os membros herdam o espaço de fim da comissão (inicialmente)
 
-mandato => trocar por permanente ou temporário
+mandato => trocar por permanente ou temporário ✅
 
 ---
 
@@ -22,7 +22,7 @@ checar a data de inicio da nova formação da comissão (INF 2022) => com data f
 
 TEMPLATE SALVAR TEMP O PERMANENTE
 
-Funcionario -> replace to Servidor
+Funcionario -> replace to Servidor ✅
 
 DIREÇÃO != CONINF separar os dois em duas comissões
 
