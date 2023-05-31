@@ -39,7 +39,7 @@ export class CommitteeService {
          (newParams as Prisma.CommitteeCreateInput).members = {
             createMany: {
                data: dto.members.map((e) => {
-                  return { member_id: e };
+                  return { employee_id: e };
                }),
             },
          };

@@ -1,23 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
-<<<<<<< HEAD:server/src/services/member.service.ts
-import { Member, Prisma } from '@prisma/client';
-import { MemberOnCommitteeService } from './member_on_committee.service';
-
-@Injectable()
-export class MemberService {
-   constructor(
-      private prisma: PrismaService,
-      private memberOnCommitteeService: MemberOnCommitteeService,
-   ) {}
-=======
 import { Employee, Prisma } from '@prisma/client';
 
 @Injectable()
 export class EmployeeService {
 
    constructor(private prisma: PrismaService) {}
->>>>>>> refactor:server/src/services/employee.service.ts
 
    async getOne(id: number): Promise<Employee | null> {
       return this.employee({
@@ -74,11 +62,7 @@ export class EmployeeService {
    }
 
    async getActiveMemberCommitteeHistory(): Promise<any[]> {
-<<<<<<< HEAD:server/src/services/member.service.ts
-      const results: any[] = await this.prisma.member.findMany({
-=======
-      const results = await this.prisma.employee.findMany({
->>>>>>> refactor:server/src/services/employee.service.ts
+      const results: any[] = await this.prisma.employee.findMany({
          select: {
             id: true,
             name: true,
