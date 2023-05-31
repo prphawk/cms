@@ -26,7 +26,6 @@ export class DataFactory {
          bond: 'Vínculo ' + faker.commerce.department(),
          begin_date: faker.date.past(),
          end_date: faker.date.future(),
-         term: +faker.random.numeric(),
          ordinance: 'Portaria ' + faker.random.alphaNumeric(5),
          observations: faker.lorem.sentence(),
          is_active: true,

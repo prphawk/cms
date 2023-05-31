@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { CommitteeService } from './committee.service';
 import { PrismaService } from '../database/prisma.service';
 import { DataFactory } from '../database/data.factory';
-import { CommitteeCreateDTO } from 'src/DTOs/committee.dto'
+import { CommitteeCreateDTO, CommitteeUpdateDTO } from 'src/DTOs/committee.dto'
 
 describe('CommitteeService', () => {
    let committeeService: CommitteeService;
@@ -40,7 +40,6 @@ describe('CommitteeService', () => {
          expect(com.end_date).toEqual(mockCom.end_date);
          expect(com.observations).toEqual(mockCom.observations);
          expect(com.ordinance).toEqual(mockCom.ordinance);
-         expect(com.term).toEqual(mockCom.term);
       });
 
       it('should create and return committee w/ the correct default values', async () => {
@@ -56,7 +55,6 @@ describe('CommitteeService', () => {
          expect(response.is_active).toEqual(true);
          expect(response.begin_date).toEqual(null);
          expect(response.end_date).toEqual(null);
-         expect(response.term).toEqual(1);
          expect(response.observations).toEqual(null);
          expect(response.ordinance).toEqual(null);
       });
@@ -109,8 +107,7 @@ describe('CommitteeService', () => {
             end_date: new Date(),
             observations: 'Updated',
             ordinance: 'Updated',
-            term: 2,
-         };
+         } as CommitteeUpdateDTO;
 
          const response = await committeeService.update({
             where: { id: com.id },
@@ -124,7 +121,6 @@ describe('CommitteeService', () => {
          expect(response.end_date).toEqual(updatedMock.end_date);
          expect(response.observations).toEqual(updatedMock.observations);
          expect(response.ordinance).toEqual(updatedMock.ordinance);
-         expect(response.term).toEqual(updatedMock.term);
       });
    });
 

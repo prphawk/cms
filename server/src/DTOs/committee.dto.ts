@@ -5,8 +5,6 @@ import {
    IsString,
    IsBoolean,
    IsOptional,
-   Min,
-   Max,
    IsInt,
    IsDate,
    IsArray,
@@ -35,12 +33,6 @@ export class CommitteeCreateDTO {
    @Type(() => Date)
    end_date?: Date;
 
-   @Min(1)
-   @Max(100)
-   @IsInt()
-   @IsOptional()
-   term?: number;
-
    @IsString()
    @IsOptional()
    ordinance?: string;
@@ -53,8 +45,11 @@ export class CommitteeCreateDTO {
    @IsInt({ each: true })
    @IsOptional()
    members?: number[];
+
+   @IsOptional()
+   committee_template?: number;
 }
 
 export class CommitteeUpdateDTO extends PartialType(
-   OmitType(CommitteeCreateDTO, ['members'] as const),
+   OmitType(CommitteeCreateDTO, ['members', 'committee_template'] as const),
 ) {}
