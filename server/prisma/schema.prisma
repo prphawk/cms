@@ -14,33 +14,6 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
-
-<<<<<<< HEAD
-model Member {
-  id         Int                 @id @default(autoincrement())
-  name       String
-  is_active  Boolean             @default(true)
-  committees MemberOnCommittee[]
-}
-
-model Committee {
-  id           Int                 @id @default(autoincrement())
-  bond         String //Vínculo 
-  name         String //Órgão
-  begin_date   DateTime?
-  end_date     DateTime?
-  term         Int?                @default(1) //Ordem do mandato
-  ordinance    String? //Portaria 
-  observations String?
-  is_active    Boolean             @default(true)
-  members      MemberOnCommittee[]
-}
-
-model MemberOnCommittee {
-  member       Member    @relation(fields: [member_id], references: [id])
-  member_id    Int // relation scalar field (used in the `@relation` attribute above)
-  committee    Committee @relation(fields: [committee_id], references: [id])
-=======
 model Employee {
   id    Int     @default(autoincrement()) @id
   name  String
@@ -57,15 +30,15 @@ model Committee {
   ordinance String? //Portaria 
   observations String?
   is_active Boolean @default(true)
-  is_singleton Boolean @default(true)
   members Membership[]
+  committee_template CommitteeTemplate? @relation(fields: [committee_template_id], references: [id])
+  committee_template_id Int? // relation scalar field (used in the `@relation` attribute above) @map("committee_template_id")
 }
 
 model Membership {
   employee Employee @relation(fields: [employee_id], references: [id])
-  employee_id Int // relation scalar field (used in the `@relation` attribute above) @map("member_id")
+  employee_id Int // relation scalar field (used in the `@relation` attribute above) @map("employee_id")
   committee Committee @relation(fields: [committee_id], references: [id])
->>>>>>> refactor
   committee_id Int // relation scalar field (used in the `@relation` attribute above)
   role         String?   @default("Membro") //Cargo
   begin_date   DateTime? @default(now())
@@ -73,27 +46,24 @@ model Membership {
   observations String?
   is_active    Boolean   @default(true)
 
-<<<<<<< HEAD
-  @@id([member_id, committee_id])
-  @@map("MembersOnCommittees")
+  @@id([employee_id, committee_id])
+	@@map("MembersOnCommittees")
 }
 
 model RoleTemplate {
   id                  Int                @id @default(autoincrement())
   role                String
-  CommitteeTemplate   CommitteeTemplate @relation(fields: [committeeTemplateId], references: [id])
-  committeeTemplateId Int
+  committee_template   CommitteeTemplate @relation(fields: [committee_template_id], references: [id])
+  committee_template_id Int
 }
 
 model CommitteeTemplate {
   id    Int            @id @default(autoincrement())
   bond  String //Vínculo 
   name  String //Órgão
+  is_singleton Boolean @default(true)
   roles RoleTemplate[]
+  committees Committee[]
 }
 
-=======
-  @@id([employee_id, committee_id])
-	@@map("MembersOnCommittees")
-}
->>>>>>> refactor
+
