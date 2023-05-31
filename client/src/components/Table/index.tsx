@@ -12,7 +12,6 @@ const Table = ({
 }: ITable) => {
   return (
     <div>
-      <>
         <Header {...tableInfo} />
         <Body
           type={type}
@@ -22,7 +21,6 @@ const Table = ({
           editMode={editMode}
           onUpdateTable={onUpdateTable}
         />
-      </>
     </div>
   )
 }

@@ -10,7 +10,7 @@ import {
 import { IButton } from './types'
 
 const Button = ({
-  title,
+  title, 
   children,
   handleClick,
   type,

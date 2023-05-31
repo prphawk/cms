@@ -27,7 +27,7 @@ const Visualization = () => {
   useEffect(() => {
     if (exportPDF) {
       try {
-        createPDF(table, 'members_on_committees')
+        createPDF(table, 'membership')
       } catch (e) {
         console.log(e)
       } finally {
