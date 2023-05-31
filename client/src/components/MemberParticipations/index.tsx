@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { MemberDetailsHeader } from '../../data/membersDetailsHeader'
+import { MemberDetailsHeader } from '../../data/employeesDetailsHeader'
 import { NoContentMessage } from '../../styles/commonStyles'
 import Button from '../Button'
 import Icon from '../Icon'
@@ -20,7 +20,7 @@ const MemberParticipations = ({
       <Button
         title={`${
           displayActive ? 'ocultar' : 'mostrar'
-        } participações ativas do membro`}
+        } participações ativas do servidor`}
         type="subsection"
         handleClick={() => setDisplayActive(!displayActive)}
       >
@@ -37,7 +37,7 @@ const MemberParticipations = ({
             />
           ) : (
             <NoContentMessage>
-              Esse membro não participa de nenhuma comissão no momento
+              Esse servidor não participa de nenhuma comissão no momento
             </NoContentMessage>
           )}
         </>
@@ -45,7 +45,7 @@ const MemberParticipations = ({
       <Button
         title={`${
           displayActive ? 'ocultar' : 'mostrar'
-        } histórico de participações do membro`}
+        } histórico de participações do servidor`}
         type="subsection"
         handleClick={() => setDisplayClosed(!displayClosed)}
       >
@@ -61,7 +61,7 @@ const MemberParticipations = ({
               content={history}
             />
           ) : (
-            <NoContentMessage>Não há histórico desse membro</NoContentMessage>
+            <NoContentMessage>Não há histórico desse servidor</NoContentMessage>
           )}
         </>
       )}

@@ -5,14 +5,15 @@ import Popup from '../../../components/Popup'
 import Table from '../../../components/Table'
 import Title from '../../../components/Title'
 import { EntityContext } from '../../../context/CommitteeContext'
-import { FontBold, MainContainer } from '../../../styles/commonStyles'
+import { FontBold, MainContainer, NoContentMessage } from '../../../styles/commonStyles'
 import { createPDF } from '../../../utils/CreatePDF'
 import { getEmptyEntity } from '../../../utils/EmptyEntity'
 import RequestManager from '../../../utils/RequestManager'
 import { formatMember } from '../../../utils/FormatUtils'
 import { memberType } from '../../../types/contentTypes'
-import { memberGetAllAnswerEntry } from '../../../types/requestAnswerTypes'
-import { MemberTableHeader } from '../../../data/membersHeader'
+import { employeeGetAllAnswerEntry } from '../../../types/requestAnswerTypes'
+import { MemberTableHeader } from '../../../data/employeesHeader'
+import { delay } from '../../../utils/TimeUtils'
 
 const Visualization = () => {
   const [displayPopup, setDisplayPopup] = useState(false)
@@ -26,7 +27,7 @@ const Visualization = () => {
   useEffect(() => {
     if (exportPDF) {
       try {
-        createPDF(table, 'members_on_committees')
+        createPDF(table, 'membership')
       } catch (e) {
         console.log(e)
       } finally {
@@ -48,9 +49,18 @@ const Visualization = () => {
     setCurrentMember({ ...getEmptyEntity(), content: undefined })
   }
 
-  const handleDeactivateCommittee = () => {
-    // TODO: desativar membro
+  const handleDeactivateMember = () => {
+    RequestManager.deactivateMember(currentMember)
     closePopUp()
+
+    let deactivated_member_index = memberContent.findIndex((obj:any ) => {
+      return obj.id === currentMember.id
+    })
+
+    memberContent.splice(deactivated_member_index, 1)
+
+    setMemberContent(memberContent)
+    setDisplayedContent(memberContent)
   }
 
   useEffect(() => {
@@ -61,7 +71,8 @@ const Visualization = () => {
 
   useEffect(() => {
     const request_answer = async () => {
-      let member_content_raw: memberGetAllAnswerEntry[] =
+      await delay(150)
+      let member_content_raw: employeeGetAllAnswerEntry[] =
         await RequestManager.getAllMembers()
       let member_content: memberType[] = []
 
@@ -77,20 +88,21 @@ const Visualization = () => {
     if (action === 'search') {
       setSearchText(currentMember.name)
     }
+
+    console.log("request")
   }, [])
 
   useEffect(() => {
     if (searchtext.length > 0) {
       let searchTextLowerCase = searchtext.toLowerCase()
       let newMembers = [...memberContent]
-      console.log(memberContent)
       newMembers = newMembers.filter((item) => {
+        let hasContentRelated = false
         let memberNameLowerCase = item.content[0].toLowerCase()
         if (memberNameLowerCase.includes(searchTextLowerCase)) {
           return true
         }
 
-        let hasContentRelated = false
         item.committees.active_participations.forEach((participation) => {
           participation.content.forEach((value) => {
             console.log(`checando: ${value}`)
@@ -121,17 +133,17 @@ const Visualization = () => {
     <>
       {exportPDF ? (
         <div ref={table}>
-          <Title type="secondary">Comissões por pessoa</Title>
+          <Title type="secondary">Servidores</Title>
           <ExportableTable type={'members'} content={displayedContent} />
         </div>
       ) : (
         <>
           {displayPopup && (
             <Popup
-              title={'Desativar Membro'}
-              action={'Desativar Membro'}
+              title={'Desativar Servidor'}
+              action={'Desativar Servidor'}
               actionType={'important'}
-              handleActionClick={handleDeactivateCommittee}
+              handleActionClick={handleDeactivateMember}
               handleCancelClick={closePopUp}
             >
               Você tem certeza que deseja desativar{' '}
@@ -141,19 +153,25 @@ const Visualization = () => {
           )}
           <MainContainer displayingPopup={displayPopup}>
             <HeaderPrimary
-              headerTitle="Comissões por pessoa"
-              searchPlaceholder="Pesquise pelo nome do funcionário..."
+              headerTitle="Servidores"
+              searchPlaceholder="Pesquise pelo nome do servidor..."
               searchText={searchtext}
               setSearchText={(input) => setSearchText(input)}
               handleExport={(type) => {
                 type && setExportPDF(true)
               }}
             />
-            <Table
-              tableInfo={MemberTableHeader}
-              type={'members'}
-              content={displayedContent}
-            />
+            {displayedContent.length > 0 ? (
+              <Table
+                tableInfo={MemberTableHeader}
+                type={'members'}
+                content={displayedContent}
+              />
+            ) : (
+              <NoContentMessage>
+                Não há membros ativos no momento
+              </NoContentMessage>
+            )}
           </MainContainer>
         </>
       )}

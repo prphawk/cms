@@ -26,21 +26,21 @@ const EditOptionsBox = ({
         </Button>
       )}
       <Button
-        title={`editar um ${type === 'committee' ? 'órgão' : 'membro'}`}
+        title={`editar um ${type === 'committee' ? 'órgão' : 'servidor'}`}
         type="transparent"
         color="black"
         handleClick={handleEdit}
       >
-        <Icon type="edit" /> Editar {type === 'committee' ? 'Órgão' : 'Membro'}
+        <Icon type="edit" /> Editar {type === 'committee' ? 'Órgão' : 'Servidor'}
       </Button>
       <Button
-        title={`desativar um ${type === 'committee' ? 'órgão' : 'membro'}`}
+        title={`desativar um ${type === 'committee' ? 'órgão' : 'servidor'}`}
         type="attention"
         noBorder
         handleClick={handleDisable}
       >
         <Icon type="disable" /> Desativar{' '}
-        {type === 'committee' ? 'Órgão' : 'Membro'}
+        {type === 'committee' ? 'Órgão' : 'Servidor'}
       </Button>
     </Container>
   )

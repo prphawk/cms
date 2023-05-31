@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../database/prisma.service';
+<<<<<<< HEAD:server/src/services/member.service.ts
 import { Member, Prisma } from '@prisma/client';
 import { MemberOnCommitteeService } from './member_on_committee.service';
 
@@ -9,9 +10,17 @@ export class MemberService {
       private prisma: PrismaService,
       private memberOnCommitteeService: MemberOnCommitteeService,
    ) {}
+=======
+import { Employee, Prisma } from '@prisma/client';
 
-   async getOne(id: number): Promise<Member | null> {
-      return this.member({
+@Injectable()
+export class EmployeeService {
+
+   constructor(private prisma: PrismaService) {}
+>>>>>>> refactor:server/src/services/employee.service.ts
+
+   async getOne(id: number): Promise<Employee | null> {
+      return this.employee({
          where: { id },
          include: {
             committees: { include: { committee: true } },
@@ -20,7 +29,7 @@ export class MemberService {
    }
 
    async getAll() {
-      return this.prisma.member.findMany({
+      return this.prisma.employee.findMany({
          where: { is_active: true },
          orderBy: { name: 'asc' },
          include: {
@@ -32,7 +41,7 @@ export class MemberService {
    }
 
    async getOptions() {
-      return this.prisma.member.findMany({
+      return this.prisma.employee.findMany({
          where: { is_active: true },
          orderBy: { name: 'asc' },
          select: {
@@ -42,33 +51,34 @@ export class MemberService {
       });
    }
 
-   private async member(params: Prisma.MemberFindUniqueArgs): Promise<Member | null> {
-      return this.prisma.member.findUnique(params);
+   async employee(params: Prisma.EmployeeFindUniqueOrThrowArgs): Promise<Employee | null> {
+      return this.prisma.employee.findUnique(params);
    }
 
-   private async members(params: Prisma.MemberFindManyArgs): Promise<Member[]> {
-      return this.prisma.member.findMany(params);
-   }
 
-   async create(data: Prisma.MemberCreateInput): Promise<Member> {
-      return this.prisma.member.create({ data });
+   async create(data: Prisma.EmployeeCreateInput): Promise<Employee> {
+      return this.prisma.employee.create({ data });
    }
 
    async update(params: {
-      where: Prisma.MemberWhereUniqueInput;
-      data: Prisma.MemberUpdateInput;
-   }): Promise<Member> {
-      return this.prisma.member.update(params);
+      where: Prisma.EmployeeWhereUniqueInput;
+      data: Prisma.EmployeeUpdateInput;
+   }): Promise<Employee> {
+      return this.prisma.employee.update(params);
    }
 
-   async delete(where: Prisma.MemberWhereUniqueInput): Promise<Member> {
-      return this.prisma.member.delete({
+   async delete(where: Prisma.EmployeeWhereUniqueInput): Promise<Employee> {
+      return this.prisma.employee.delete({
          where,
       });
    }
 
    async getActiveMemberCommitteeHistory(): Promise<any[]> {
+<<<<<<< HEAD:server/src/services/member.service.ts
       const results: any[] = await this.prisma.member.findMany({
+=======
+      const results = await this.prisma.employee.findMany({
+>>>>>>> refactor:server/src/services/employee.service.ts
          select: {
             id: true,
             name: true,

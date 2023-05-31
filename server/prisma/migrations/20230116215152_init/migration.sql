@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE `Member` (
+CREATE TABLE `Employee` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
     `email` VARCHAR(191) NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE `MembersOnCommittees` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey
-ALTER TABLE `MembersOnCommittees` ADD CONSTRAINT `MembersOnCommittees_member_id_fkey` FOREIGN KEY (`member_id`) REFERENCES `Member`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `MembersOnCommittees` ADD CONSTRAINT `MembersOnCommittees_member_id_fkey` FOREIGN KEY (`member_id`) REFERENCES `Employee`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `MembersOnCommittees` ADD CONSTRAINT `MembersOnCommittees_committee_id_fkey` FOREIGN KEY (`committee_id`) REFERENCES `Committee`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

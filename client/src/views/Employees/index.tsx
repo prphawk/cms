@@ -3,9 +3,9 @@ import { EntityContext } from '../../context/CommitteeContext'
 import Edit from './Edit'
 import Visualization from './Visualization'
 
-const MembersView = () => {
+const EmployeesView = () => {
   const { action } = useContext(EntityContext)
 
   return <>{action === 'edit' ? <Edit /> : <Visualization />}</>
 }
-export default MembersView
+export default EmployeesView

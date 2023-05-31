@@ -15,6 +15,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+<<<<<<< HEAD
 model Member {
   id         Int                 @id @default(autoincrement())
   name       String
@@ -39,6 +40,32 @@ model MemberOnCommittee {
   member       Member    @relation(fields: [member_id], references: [id])
   member_id    Int // relation scalar field (used in the `@relation` attribute above)
   committee    Committee @relation(fields: [committee_id], references: [id])
+=======
+model Employee {
+  id    Int     @default(autoincrement()) @id
+  name  String
+  is_active Boolean @default(true)
+  committees Membership[]
+}
+
+model Committee {
+  id    Int     @default(autoincrement()) @id
+  bond  String //Vínculo 
+  name  String //Órgão
+  begin_date DateTime?
+  end_date DateTime?
+  ordinance String? //Portaria 
+  observations String?
+  is_active Boolean @default(true)
+  is_singleton Boolean @default(true)
+  members Membership[]
+}
+
+model Membership {
+  employee Employee @relation(fields: [employee_id], references: [id])
+  employee_id Int // relation scalar field (used in the `@relation` attribute above) @map("member_id")
+  committee Committee @relation(fields: [committee_id], references: [id])
+>>>>>>> refactor
   committee_id Int // relation scalar field (used in the `@relation` attribute above)
   role         String?   @default("Membro") //Cargo
   begin_date   DateTime? @default(now())
@@ -46,6 +73,7 @@ model MemberOnCommittee {
   observations String?
   is_active    Boolean   @default(true)
 
+<<<<<<< HEAD
   @@id([member_id, committee_id])
   @@map("MembersOnCommittees")
 }
@@ -64,3 +92,8 @@ model CommitteeTemplate {
   roles RoleTemplate[]
 }
 
+=======
+  @@id([employee_id, committee_id])
+	@@map("MembersOnCommittees")
+}
+>>>>>>> refactor

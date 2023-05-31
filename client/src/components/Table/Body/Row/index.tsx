@@ -14,15 +14,17 @@ import {
 } from './styles'
 import Dropdown from '../../Input/Dropdown'
 import TextInput from '../../Input/TextInput'
-import { member_list_mock } from '../../../../_mock/memberList'
-import { useContext } from 'react'
+import { employee_list_mock } from '../../../../_mock/memberList'
+import { useContext, useState } from 'react'
 import { EntityContext } from '../../../../context/CommitteeContext'
-import Paths from '../../../../constants/Paths'
+import Paths from '../../../../routes/Paths'
 import {
   TableTypesBase,
   TableTypesExtended,
 } from '../../../../types/tableTypes'
 import Button from '../../../Button'
+import RequestManager from '../../../../utils/RequestManager'
+import { employeeGetOptionsEntry } from '../../../../types/requestAnswerTypes'
 
 const Row = ({
   children,
@@ -42,16 +44,19 @@ const Row = ({
   const navigate = useNavigate()
   const { setAction, setCurrentEntity } = useContext(EntityContext)
   const { headers, sizes, type } = tableInfo
+  const [optionsList, setOptionsList] = useState([] as employeeGetOptionsEntry[])
+
+  const update_options = async() => {
+    let options_answer = await RequestManager.getMemberList()
+
+    if(JSON.stringify(options_answer) !== JSON.stringify(optionsList)) {
+      setOptionsList(options_answer)
+    }
+  }
 
   const handleSeeFunctionHistory = (item: any) => {
     setAction('function-history')
     setCurrentEntity({ id: data.id, name: item })
-  }
-
-  const handleSeeCommittee = (item: any) => {
-    setAction('search')
-    setCurrentEntity({ id: data.id, name: item })
-    navigate(Paths.COMMITTEE)
   }
 
   const handleClick = (type: TableTypesExtended, item: any, index: number) => {
@@ -62,17 +67,26 @@ const Row = ({
       return handleSeeFunctionHistory(item)
     }
     return handleSeeCommittee(item)
+  } 
+
+  const handleSeeCommittee = (item: any) => {
+    setAction('search')
+    setCurrentEntity({ id: data.id, name: item })
+    navigate(Paths.COMMITTEES_PATH)
   }
 
+  
   const handleSeeMember = (item: any) => {
     setAction('search')
     setCurrentEntity({ id: data.id, name: item })
-    navigate(Paths.MEMBERS)
+    navigate(Paths.EMPLOYEES_PATH)
   }
 
   const getRowContent = (label: string | number, index: number) => {
     let columnInfo = headers[index]
     if (editMode && columnInfo.editable) {
+      update_options()
+
       switch (columnInfo.type) {
         case 'text':
           return (
@@ -87,7 +101,7 @@ const Row = ({
           return (
             <Dropdown
               size={sizes[index]}
-              options={member_list_mock}
+              options={optionsList}
               optionSelected={label as string}
               setOptionSelected={(name: string) => onChange(name, index, id)}
             />

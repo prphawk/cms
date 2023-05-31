@@ -1,5 +1,5 @@
-# Comittee Manager
-### Course: Laboratória de Sistemas de Software
+# Committee Manager
+### Course: Laboratório de Sistema de Software
 #### Professor: Marcelo Pimenta
 #### Semester: 2022/2
 ---
@@ -65,6 +65,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ```bash
 $ npm install
+$ npx prisma generate
 ```
 
 #### Running the app

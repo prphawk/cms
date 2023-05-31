@@ -1,18 +1,18 @@
 import { NavItem } from '../components/NavBar/types'
-import Paths from '../constants/Paths'
+import Paths from '../routes/Paths'
 
 export const navIcon: NavItem[] = [
   {
     id: 'committee',
     icon: 'committee',
     label: 'Comissões',
-    href: Paths.COMMITTEE,
+    href: Paths.COMMITTEES_PATH,
   },
-  { id: 'members', icon: 'members', label: 'Membros', href: Paths.MEMBERS },
+  { id: 'members', icon: 'members', label: 'Servidores', href: Paths.EMPLOYEES_PATH },
   {
     id: 'configurations',
     icon: 'configurations',
     label: 'Configurações',
-    href: Paths.CONFIGURATIONS,
+    href: Paths.CONFIGURATIONS_PATH,
   },
 ]

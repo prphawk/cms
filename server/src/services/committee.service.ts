@@ -7,8 +7,8 @@ import { CommitteeCreateDTO } from 'src/DTOs/committee.dto';
 export class CommitteeService {
    constructor(private prisma: PrismaService) {}
 
-   async committee(args: Prisma.CommitteeFindUniqueArgs): Promise<Committee | null> {
-      return this.prisma.committee.findUnique(args);
+   async committee(params: Prisma.CommitteeFindUniqueOrThrowArgs): Promise<Committee | null> {
+      return this.prisma.committee.findUnique(params);
    }
 
    async committees(args: Prisma.CommitteeFindManyArgs): Promise<Committee[]> {

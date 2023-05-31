@@ -11,8 +11,13 @@ export class CommitteeController {
    async getOne(@Query('id', ParseIntPipe) id: number): Promise<Committee> {
       return this.committeeService.committee({
          where: { id },
+<<<<<<< HEAD
          include: {
             members: { include: { member: true } },
+=======
+         include: { 
+            members: { include: { employee: true } }
+>>>>>>> refactor
          },
       });
    }
@@ -21,12 +26,19 @@ export class CommitteeController {
    async getAll(): Promise<Committee[]> {
       return this.committeeService.committees({
          where: { is_active: true },
+<<<<<<< HEAD
          orderBy: { name: 'asc' },
          include: {
             members: {
                select: { member: true },
             },
          },
+=======
+         orderBy: { name: "asc" },
+         include: { members: {
+            select: { employee: true },
+          }},
+>>>>>>> refactor
       });
    }
 

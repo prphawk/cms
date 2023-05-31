@@ -1,5 +1,5 @@
 {
-  "name": "comittee-manager-app",
+  "name": "committee-manager-system_client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -22,6 +22,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "prestart": "npm i",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -46,6 +47,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.26"
   }
 }

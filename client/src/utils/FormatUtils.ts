@@ -1,15 +1,18 @@
 import {
+  committeeContentType,
   committeeParticipation,
   committeeType,
+  memberContentType,
   memberParticipation,
   memberType,
 } from '../types/contentTypes'
 import {
-  memberGetOneMemberDetailsType_committeeDetails,
+  employeeGetOneMemberDetailsType_committeeDetails,
   committeeGetAllAnswerEntry,
-  memberGetOneMemberDetailsType,
-  memberGetAllAnswerEntry_memberDetails,
-  memberGetAllAnswerEntry,
+  employeeGetOneMemberDetailsType,
+  employeeGetAllAnswerEntry_memberDetails,
+  employeeGetAllAnswerEntry,
+  membership_PatchDTO,
 } from '../types/requestAnswerTypes'
 
 function formatDate(date: string) {
@@ -25,10 +28,10 @@ function formatDate(date: string) {
   return formated_date
 }
 
-export function formatMember(member_list: memberGetAllAnswerEntry[]) {
+export function formatMember(member_list: employeeGetAllAnswerEntry[]) {
   let formated_member_info: memberType[] = []
 
-  member_list.forEach((member: memberGetAllAnswerEntry) => {
+  member_list.forEach((member: employeeGetAllAnswerEntry) => {
     let number_of_comissions = member.committees.active.length
     formated_member_info.push({
       id: member.id,
@@ -44,32 +47,32 @@ export function formatMember(member_list: memberGetAllAnswerEntry[]) {
 }
 
 function formatMemberCommitteeDetails(
-  active: memberGetAllAnswerEntry_memberDetails[],
-  history: memberGetAllAnswerEntry_memberDetails[]
+  active: employeeGetAllAnswerEntry_memberDetails[],
+  history: employeeGetAllAnswerEntry_memberDetails[]
 ) {
   let active_participations: memberParticipation[] = []
   let inactive_participations: memberParticipation[] = []
 
-  active.forEach((detail: memberGetAllAnswerEntry_memberDetails) => {
+  active.forEach((detail: employeeGetAllAnswerEntry_memberDetails) => {
     active_participations.push({
       id: detail.committee.id,
       content: [
         detail.committee.name,
         detail.role,
-        detail.begin_date != null ? formatDate(detail.begin_date) : '-',
-        detail.observations != null ? detail.observations : '-',
+        detail.begin_date ? formatDate(detail.begin_date) : '-',
+        detail.observations ? detail.observations : '-',
       ],
     })
   })
 
-  history.forEach((detail: memberGetAllAnswerEntry_memberDetails) => {
+  history.forEach((detail: employeeGetAllAnswerEntry_memberDetails) => {
     inactive_participations.push({
       id: detail.committee.id,
       content: [
         detail.committee.name,
         detail.role,
-        detail.begin_date != null ? formatDate(detail.begin_date) : '-',
-        detail.observations != null ? detail.observations : '-',
+        detail.begin_date ? formatDate(detail.begin_date) : '-',
+        detail.observations ? detail.observations : '-',
       ],
     })
   })
@@ -80,26 +83,23 @@ function formatMemberCommitteeDetails(
 }
 
 export function formatMemberOnCommitteeDetails(
-  member_details: memberGetOneMemberDetailsType,
+  member_details: employeeGetOneMemberDetailsType,
   memberOnCommittee_details:
-    | memberGetOneMemberDetailsType_committeeDetails
+    | employeeGetOneMemberDetailsType_committeeDetails
     | undefined
 ) {
   if (memberOnCommittee_details === undefined) {
     return undefined
   }
+  let memberOnCommittee_details_c = memberOnCommittee_details as employeeGetOneMemberDetailsType_committeeDetails
   return {
     id: member_details.id,
     content: [
       memberOnCommittee_details.role,
       member_details.name,
-      memberOnCommittee_details.begin_date == null
-        ? '-'
-        : formatDate(memberOnCommittee_details.begin_date),
+      memberOnCommittee_details.begin_date ? formatDate(memberOnCommittee_details.begin_date) : '-',
       memberOnCommittee_details.term + 'º',
-      memberOnCommittee_details.observations == null
-        ? '-'
-        : memberOnCommittee_details.observations,
+      memberOnCommittee_details.observations ? memberOnCommittee_details.observations : '-',
     ],
   } as committeeParticipation
 }
@@ -115,11 +115,20 @@ export function formatCommittee(
     let formated_date_duration: string = '-'
     let committee_details: committeeParticipation[] = []
 
-    if (committee.begin_date != null && committee.end_date != null) {
+    if (committee.begin_date && committee.end_date) {
       formated_date_duration =
         formatDate(committee.begin_date) +
         ' a ' +
         formatDate(committee.end_date)
+    }
+    else if (committee.begin_date) {
+      formated_date_duration = 
+        formatDate(committee.begin_date) +
+        ` a ` +
+        `-`
+    }
+    else if (committee.end_date) {
+      formated_date_duration = `- a ${formatDate(committee.end_date)}`
     }
 
     formated_committee_info.push({
@@ -129,7 +138,7 @@ export function formatCommittee(
         committee.bond,
         committee.ordinance,
         formated_date_duration,
-        committee.term + '°',
+        committee.term !== null ? committee.term + '°' : "",
       ],
       participation_details: committee_details_list[i],
     })
@@ -138,4 +147,50 @@ export function formatCommittee(
   })
 
   return formated_committee_info
+}
+
+export function formatDate_memberOnCommittee_PatchDTO (
+  unformated_date: string
+) {
+
+  if(unformated_date.length !== 10) {
+    return null
+  }
+
+  const formated_date_string = 
+    unformated_date.substring(6, 10) +
+    '-' +
+    unformated_date.substring(3, 5) +
+    '-' +
+    unformated_date.substring(0, 2);
+  const formated_date = new Date(formated_date_string);
+  return formated_date
+}
+
+export function formatMemberOnCommittee_PatchDTO(
+  memberOnCommitteeContent: committeeContentType | memberParticipation,
+  opType: "committee_edit" | "member_edit"
+) {
+  let formated_info = [] as any;
+  
+  if(opType === "committee_edit") {
+    memberOnCommitteeContent = memberOnCommitteeContent as committeeContentType
+    formated_info = {
+      role: memberOnCommitteeContent[0],
+      begin_date: formatDate_memberOnCommittee_PatchDTO(memberOnCommitteeContent[2]),
+      term: parseInt(memberOnCommitteeContent[3][0]),
+      observations: (memberOnCommitteeContent[4] !== "")? memberOnCommitteeContent[4] : null,
+      is_active: true
+    } as membership_PatchDTO
+  }
+  else {
+    memberOnCommitteeContent = memberOnCommitteeContent as memberParticipation
+    formated_info = {
+      role: memberOnCommitteeContent.content[1],
+      observations: (memberOnCommitteeContent.content[3] !== "")? memberOnCommitteeContent.content[3] : null,
+      is_active: true
+    } as membership_PatchDTO
+  }
+
+  return formated_info
 }
